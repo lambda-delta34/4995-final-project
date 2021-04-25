@@ -88,6 +88,25 @@ def plot_acc(fn1_new, fn2_baseline, x_label, y_label, title):
 	plt.savefig("./plots/acc_"+fn)
 	plt.close()
 
+def plot_acc2(fn1_normal, fn2_uniform, x_label, y_label, title):
+	df_new = pd.read_csv(fn1_normal)
+	df_base = pd.read_csv(fn2_uniform) 
+
+	acc_df = pd.DataFrame()
+	acc_df['Random Normal data'] = df_new['relative_err']
+	acc_df['Ranmdom Uniform data'] = df_base['relative_err']
+	#query_df['baseline query'] = df_base['query']
+	acc_df.plot()
+	plt.title(title)
+	plt.xlabel(x_label)
+	plt.ylabel(y_label)
+	fn = fn1_normal.split('.')
+	fn = fn[1].split('/')
+	fn = fn[3]
+	print(fn)
+	plt.savefig("./plots/data_acc_"+fn)
+	plt.close()
+
 # speed 
 
 plot_speed("./speed/uniform/laplacian_tf_D_unif.csv", "./speed/uniform/near_opt_D_unif.csv", 
@@ -125,7 +144,21 @@ plot_acc("./accuracy/uniform/laplacian_D_unif_acc.csv", "./accuracy/uniform/near
  	 "D", "Relative Error", "model comapred with D in random uniform (N=100k, T=50)")
 
 plot_acc("./accuracy/normal/laplacian_N_acc.csv", "./accuracy/normal/near_opt_N_acc.csv", 
-	 "N", "Relative Error", "model comapred with N in random (D=50, T=50)")
+	 "N", "Relative Error", "model comapred with N in random normal (D=50, T=50)")
 
 plot_acc("./accuracy/uniform/laplacian_N_unif_acc.csv", "./accuracy/uniform/near_opt_N_unif_acc.csv", 
-	 "N", "Relative Error", "model comapred with N in uniform (D=50, T=50)")
+	 "N", "Relative Error", "model comapred with N in random uniform (D=50, T=50)")
+
+
+# accuracy compared w normal and uniform 
+plot_acc2("./accuracy/normal/near_opt_N_acc.csv", "./accuracy/uniform/near_opt_N_unif_acc.csv", 
+	 "N", "Relative Error", "NearOpt Gaussian in N with different data")
+
+plot_acc2("./accuracy/normal/near_opt_D_acc.csv", "./accuracy/uniform/near_opt_D_unif_acc.csv", 
+	 "D", "Relative Error", "NearOpt Gaussian in D with different data")
+
+plot_acc2("./accuracy/normal/laplacian_N_acc.csv", "./accuracy/uniform/laplacian_N_unif_acc.csv", 
+	 "N", "Relative Error", "Laplacian+RR in N with different data")
+
+plot_acc2("./accuracy/normal/laplacian_D_acc.csv", "./accuracy/uniform/laplacian_D_unif_acc.csv", 
+	 "D", "Relative Error", "Laplacian+RR in D with different data")
