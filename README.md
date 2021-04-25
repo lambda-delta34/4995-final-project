@@ -19,3 +19,5 @@ This is the repository for the code implemented and benchmarked for KDE estimati
 - Jupyter notebooks for benchmarking different KDE+LSH pair based on relative error to true KDE as well as query/preprocessing time (`laplacian benchmark.ipynb` and `near optimal benchmark.ipynb`)
 
 - Data used for final report. (`data`, `normal`/`uniform` menas the dataset for benchmarking)
+
+- Inside Data directory, we also include the code for plotting the figure as well as the figure themselves (`data/plot.py`, `data/plot1`, `data/plot2`) 
